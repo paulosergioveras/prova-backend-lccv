@@ -4,8 +4,8 @@ from .item_avaliacao import TipoItemAvaliacaoDesempenho, ItemAvaliacaoDesempenho
 
 __all__ = [
     'AvaliacaoDesempenho',
-    'TipoItemAvaliacaoDesempenho',
-    'ItemAvaliacaoDesempenho',
     'DimensaoItemAvaliacao',
     'StatusAvaliacao',
+    'TipoItemAvaliacaoDesempenho',
+    'ItemAvaliacaoDesempenho',
 ]

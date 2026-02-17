@@ -5,7 +5,6 @@ from django.db.models import Sum
 
 from .choices import StatusAvaliacao
 from .colaborador import Colaborador
-from .item_avaliacao import TipoItemAvaliacaoDesempenho
 
 
 class AvaliacaoDesempenho(models.Model):
@@ -29,7 +28,7 @@ class AvaliacaoDesempenho(models.Model):
         default=StatusAvaliacao.CRIADA
     )
 
-    nota = models.DecimalField(decimal_places=2, default=0.00)
+    nota = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
     sugestoes_supervisor = models.TextField(blank=True, null=True)
     observacoes_avaliado = models.TextField(blank=True, null=True)
 
@@ -48,8 +47,12 @@ class AvaliacaoDesempenho(models.Model):
 
         if nova_avaliacao:
             from .item_avaliacao import ItemAvaliacaoDesempenho
+            from django.apps import apps
 
             with transaction.atomic():
+                TipoItemAvaliacaoDesempenho = apps.get_model(
+                    'avaliacao_desempenho', 'TipoItemAvaliacaoDesempenho'
+                )
                 tipos = TipoItemAvaliacaoDesempenho.objects.all()
                 item_criar = [
                     ItemAvaliacaoDesempenho(
@@ -79,6 +82,10 @@ class AvaliacaoDesempenho(models.Model):
 
     def atualizar_nota(self):
         with transaction.atomic():
+            from django.apps import apps
+            TipoItemAvaliacaoDesempenho = apps.get_model(
+                'avaliacao_desempenho', 'TipoItemAvaliacaoDesempenho'
+            )
             total_tipos = TipoItemAvaliacaoDesempenho.objects.count()
 
             if total_tipos == 0:

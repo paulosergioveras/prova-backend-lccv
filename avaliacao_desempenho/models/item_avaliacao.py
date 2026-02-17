@@ -2,7 +2,11 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 from .choices import DimensaoItemAvaliacao
-from .avaliacao import AvaliacaoDesempenho
+
+'''
+AvaliacaoDesempenho é referenciado por string em ForeignKey
+nenhuma importação necessária para evitar dependência circular
+'''
 
 
 class TipoItemAvaliacaoDesempenho(models.Model):
@@ -25,13 +29,13 @@ class TipoItemAvaliacaoDesempenho(models.Model):
 
 class ItemAvaliacaoDesempenho(models.Model):
     avaliacao = models.ForeignKey(
-        AvaliacaoDesempenho,
+        'AvaliacaoDesempenho',
         on_delete=models.CASCADE,
         related_name='itens'
     )
      
     tipo_item_avaliacao_desempenho = models.ForeignKey(
-        TipoItemAvaliacaoDesempenho,
+        'TipoItemAvaliacaoDesempenho',
         on_delete=models.PROTECT,
         related_name='tipos'
     )
