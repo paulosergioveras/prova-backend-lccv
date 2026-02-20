@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'avaliacao_desempenho',
     'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
