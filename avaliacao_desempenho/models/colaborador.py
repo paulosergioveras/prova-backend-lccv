@@ -9,5 +9,10 @@ class Colaborador(models.Model):
     email = models.EmailField(unique=True)
     cpf = models.CharField(max_length=11, unique=True)
 
+    class Meta:
+        verbose_name = 'Colaborador'
+        verbose_name_plural = 'Colaboradores'
+        ordering = ['nome']
+
     def __str__(self):
         return self.nome
