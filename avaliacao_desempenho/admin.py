@@ -148,3 +148,12 @@ class ItemAvaliacaoDesempenhoAdmin(admin.ModelAdmin):
     )
 
     ordering = ('avaliacao', 'tipo_item_avaliacao_desempenho',)
+    
+    def save_model(self, request, obj, form, change):
+        '''
+        Atualiza a nota da avaliação após salvar o item.
+        '''
+
+        super().save_model(request, obj, form, change)
+        if change:
+            obj.avaliacao.atualizar_nota()
