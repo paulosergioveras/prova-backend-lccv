@@ -7,7 +7,7 @@ from .models import (
     ItemAvaliacaoDesempenho,
     TipoItemAvaliacaoDesempenho,
 )
-from models.choices import StatusAvaliacao
+from .models.choices import StatusAvaliacao
 
 
 @admin.register(Colaborador)
