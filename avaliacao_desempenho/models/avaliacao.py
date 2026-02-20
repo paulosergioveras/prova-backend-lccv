@@ -8,6 +8,10 @@ from .colaborador import Colaborador
 
 
 class AvaliacaoDesempenho(models.Model):
+    '''
+    Modelo para avaliação de desempenho dos colaboradores.
+    '''
+
     colaborador = models.ForeignKey(
         Colaborador,
         on_delete=models.CASCADE,
@@ -63,7 +67,6 @@ class AvaliacaoDesempenho(models.Model):
                     for tipo in tipos
                 ]
                 ItemAvaliacaoDesempenho.objects.bulk_create(item_criar)
-
 
     def iniciar(self):
         if self.status_avaliacao == StatusAvaliacao.CRIADA:

@@ -5,11 +5,16 @@ from .choices import DimensaoItemAvaliacao
 
 '''
 AvaliacaoDesempenho é referenciado por string em ForeignKey
-nenhuma importação necessária para evitar dependência circular
+nenhuma importação necessária para evitar dependência circular.
 '''
 
 
 class TipoItemAvaliacaoDesempenho(models.Model):
+    '''
+    Modelo para representar os tipos dos itens de avaliação de desempenho
+    como comportamento, entregas e trabalho em equipe.
+    '''
+
     dimensao = models.CharField(
         max_length=30,
         choices=DimensaoItemAvaliacao.choices
@@ -28,6 +33,11 @@ class TipoItemAvaliacaoDesempenho(models.Model):
 
 
 class ItemAvaliacaoDesempenho(models.Model):
+    '''
+    Modelo para representar os itens de uma avaliação de desempenho
+    e relacionar com os tipos de item de avaliação.
+    '''
+
     avaliacao = models.ForeignKey(
         'AvaliacaoDesempenho',
         on_delete=models.CASCADE,
@@ -49,6 +59,6 @@ class ItemAvaliacaoDesempenho(models.Model):
         verbose_name = 'Item de Avaliação de Desempenho'
         verbose_name_plural = 'Itens de Avaliações de Desempenho'
         ordering = ['tipo_item_avaliacao_desempenho']
-    
+   
     def __str__(self):
         return self.tipo_item_avaliacao_desempenho
